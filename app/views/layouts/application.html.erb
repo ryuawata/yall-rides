@@ -12,6 +12,19 @@
   </head>
 
   <body>
+    <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+      <%= link_to "#", class: "navbar-brand" do %>
+        <%= image_tag "yall-rides-logo.png", alt: "y'all rides logo" %>
+      <% end %>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-link">Hello Evan!</li>
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          </li>
+        </ul>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>
