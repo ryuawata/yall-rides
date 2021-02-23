@@ -1,9 +1,16 @@
-<h1>Here are all of the Cars</h1>
-<% @cars.each do |car| %>
-  <ul>
-    <li><%= car.make %></li>
-  </li>
-  <%= car.model%></li>
-<li><%= car.price %></li>
-</ul>
-<% end %>
+<h1 style="text-align:center">All Cars</h1>
+<div class="cards">
+  <% @cars.each do |car| %>
+    <div class="card-trip">
+      <img src="https://source.unsplash.com/collection/2328095/1600x900" />
+      <div class="card-trip-infos">
+        <div>
+          <h2><%= car.make %> <%= car.model%></h2>
+          <p><%= car.year%></p>
+        </div>
+        <h2 class="card-trip-pricing">¥<%= car.price %></h2>
+        <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+      </div>
+    </div>
+  <% end %>
+</div>
