@@ -15,7 +15,13 @@
    }
 }
 
-.card-trip > img {
+// .card-trip > img {
+//   height: 200px;
+//   width: 100%;
+//   object-fit: cover;
+// }
+
+.card-trip img {
   height: 200px;
   width: 100%;
   object-fit: cover;
@@ -33,6 +39,9 @@
   margin: 0;
 }
 
+.card-trip-infos .avatar-bordered {
+  display: none;
+}
 
 .card-trip .card-trip-infos {
   padding: 16px;
