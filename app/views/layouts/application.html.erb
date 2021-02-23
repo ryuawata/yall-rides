@@ -12,6 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Condensed&family=Saira:wght@500&display=swap" rel="stylesheet">
   </head>
   <body>
-    <%= yield %>
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flashes' %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
