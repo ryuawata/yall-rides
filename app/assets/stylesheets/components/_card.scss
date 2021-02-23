@@ -129,3 +129,56 @@
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
+
+.car-info {
+  // display: flex;
+  // border: 1px solid;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.renter-info {
+  padding: 36px 16px;
+  text-align: center;
+  margin-right: 128px;
+}
+
+.renter-info h3 {
+  color: #5FA8D3;
+  margin-bottom: 24px;
+}
+
+.renter-info .avatar-large {
+  margin-bottom: 18px;
+}
+
+.renter-info p {
+  size: 28px;
+  color: #12355B;
+}
+
+.car-details {
+  padding: 34px;
+  text-align: left;
+}
+
+.details-info {
+  text-align: left;
+}
+
+.details-info h3 {
+  color: #5FA8D3;
+  text-align: right;
+}
+
+.details-info strong {
+  color: #5FA8D3;
+}
+
+.headers {
+  margin-right: 164px;
+}
+
+.car-details .headers {
+  color: #12355B;
+}
