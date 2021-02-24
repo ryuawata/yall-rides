@@ -14,7 +14,7 @@ User.destroy_all
 
 puts "Renters registering their cars..."
 
-2.times do
+50.times do
 	user = User.create!(
 		first_name: Faker::Movies::HarryPotter.character.split[0],
 		last_name: Faker::Movies::HarryPotter.character.split[1],
