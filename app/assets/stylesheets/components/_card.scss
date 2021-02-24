@@ -40,7 +40,8 @@
 }
 
 .card-trip-infos .avatar-bordered {
-  display: none;
+  width: 50px;
+  height: auto;
 }
 
 .card-trip .card-trip-infos {
@@ -56,6 +57,11 @@
   right: 16px;
   top: -20px;
   width: 40px;
+}
+
+.card-trip-infos-right-side {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 
@@ -192,4 +198,48 @@
 
 .car-details .headers {
   color: #12355B;
+}
+
+// Card Product Section
+.card-product {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+}
+
+.card-product img {
+  height: 100%;
+  width: 120px;
+  object-fit: cover;
+}
+
+.card-product h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-product p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-product .card-product-infos {
+  padding: 16px;
+}
+
+.my-profile .renter-info {
+  padding: 36px 16px;
+  text-align: left;
+  margin-right: 128px;
+}
+
+.my-profile {
+  display: flex;
 }

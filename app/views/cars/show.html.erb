@@ -13,7 +13,7 @@
   <div class="car-info">
     <div class="renter-info">
       <h3>Car Owner:</h3>
-      <%= image_tag "https://kitt.lewagon.com/placeholder/users/arthur-littm", class: "avatar-large", alt: "avatar-large" %>
+      <%= cl_image_tag(@car.user.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
       <p>Marcus</p>
       <p>Member since 2018</p>
     </div>
