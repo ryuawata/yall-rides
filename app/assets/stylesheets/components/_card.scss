@@ -40,7 +40,8 @@
 }
 
 .card-trip-infos .avatar-bordered {
-  display: none;
+  width: 50px;
+  height: auto;
 }
 
 .card-trip .card-trip-infos {
@@ -56,6 +57,11 @@
   right: 16px;
   top: -20px;
   width: 40px;
+}
+
+.card-trip-infos-right-side {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 

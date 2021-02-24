@@ -3,15 +3,21 @@
   <% @cars.each do |car| %>
     <div class="card-trip">
       <%= link_to car_path(car) do %>
-        <img src="https://source.unsplash.com/collection/2328095/1600x900" />
+        <%= cl_image_tag("#{car.photo.key}", crop: :fill) %>
       <% end %>
       <div class="card-trip-infos">
         <div>
           <h2><%= car.make %> <%= car.model%></h2>
           <p><%= car.year%></p>
         </div>
+        <div class="card-trip-infos-right-side">
         <h2 class="card-trip-pricing">¥<%= car.price %></h2>
+        <% if car.user.photo.attached? %>
+        <%= cl_image_tag(car.user.photo.key, crop: :thumb, gravity: :face, class: "avatar-bordered" )%>
+        <% else %>
         <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-bordered" />
+        <% end %>
+      </div>
       </div>
     </div>
   <% end %>
