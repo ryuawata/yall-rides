@@ -70,3 +70,5 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'cloudinary', '~> 1.16.0'
+
+gem 'geocoder'
