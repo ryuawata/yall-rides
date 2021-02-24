@@ -27,4 +27,11 @@
         <h3>&nbsp;&nbsp;¥<%= @car.price %></h3>
       </div>
     </div>
+    <div class="booking-form">
+        <%= simple_form_for [@car, @booking] do |f| %>
+          <%= f.input :start_date %>
+          <%= f.input :end_date %>
+          <%= f.submit "Book this car" , class: "btn btn-primary" %>
+        <% end %>
+    </div>
   </div>
