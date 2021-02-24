@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+	skip_before_action :authenticate_user!, only: [:index]
 
 	def index
 		@bookings = policy_scope(Booking)
@@ -15,7 +16,7 @@ class BookingsController < ApplicationController
 		@booking.user = current_user
 		@booking.car = @car
 		authorize @booking
-    if @booking.save
+    		if @booking.save
 			redirect_to bookings_path
 		else
 			render :new

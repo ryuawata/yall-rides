@@ -1,9 +1,9 @@
 <div class="banner-photo">
   <% if @car.photo.attached? %>
-    <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @car.photo.key, height: 300, width: 400, resize: :limit %>);">
+      <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @car.photo.key, height: 300, width: 400, resize: :limit %>);">
     <% else %>
       <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://source.unsplash.com/collection/2328095/1600x900)">
-      <% end %>
+  <% end %>
       <div class="container">
         <h1><%= @car.make %> <%= @car.model %></h1>
         <p> <%= @car.year %></p>
@@ -13,7 +13,7 @@
   <div class="car-info">
     <div class="renter-info">
       <h3>Car Owner:</h3>
-      <%= image_tag "https://kitt.lewagon.com/placeholder/users/arthur-littm", class: "avatar-large", alt: "avatar-large" %>
+      <%= cl_image_tag(@car.user.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
       <p>Marcus</p>
       <p>Member since 2018</p>
     </div>
@@ -22,16 +22,23 @@
         <h1><%= @car.year %> <%= @car.make %> <%= @car.model %></h1>
       </div>
       <div class="details-info">
-        <p> <strong>Description:</strong> &nbsp;&nbsp;<%= @car.description %></p>
-        <p> <strong>Reviews:</strong> &nbsp;&nbsp; ⭐️⭐️⭐️⭐️⭐️</p>
+      <br>
+        <p> <strong>Description:</strong> &nbsp;&nbsp;
+        <ul>
+         <%JSON.parse(@car.description).first(5).each do |description| %></p>
+            <li> <%=description.capitalize%></li>
+          <%end%>
+        </ul>
+        <br>
+        <p><strong>Reviews:</strong> &nbsp;&nbsp; ⭐️⭐️⭐️⭐️⭐️</p>
         <h3>&nbsp;&nbsp;¥<%= @car.price %></h3>
       </div>
     </div>
     <div class="booking-form">
         <%= simple_form_for [@car, @booking] do |f| %>
-          <%= f.input :start_date %>
-          <%= f.input :end_date %>
-          <%= f.submit "Book this car" , class: "btn btn-primary" %>
+          <%= f.input :start_date, as: :date, html5: true %>
+          <%= f.input :end_date, as: :date, html5: true %>
+          <%= f.submit "Book this car" , class: "btn btn-primary book" %>
         <% end %>
     </div>
   </div>

@@ -1,6 +1,21 @@
-<div class="renter-info">
-  <h3>Car Owner:</h3>
-  <%= image_tag "https://kitt.lewagon.com/placeholder/users/arthur-littm", class: "avatar-large", alt: "avatar-large" %>
-  <p>Marcus</p>
-  <p>Member since 2018</p>
+<h1 class="mt-3 mb-3" style="text-align:center">My Bookings</h1>
+<!-- <div class="my-profile">
+  <div class="renter-info">
+    <h3 class="" >My Profile</h3>
+    <%= image_tag "https://kitt.lewagon.com/placeholder/users/arthur-littm", class: "avatar-large", alt: "avatar-large" %>
+    <p>Marcus</p>
+    <p>Member since 2018</p>
+  </div> -->
+<div class="cards">
+  <% @bookings.each do |booking| %>
+    <div class="card-product">
+      <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
+      <div class="card-product-infos">
+        <p><%= booking.car.make %></p>
+        <p><%= booking.car.model %></p>
+        <p>Product description with <strong>relevant info</strong> only.</p>
+      </div>
+    </div>
+  <% end %>
+  <!-- </div> -->
 </div>

@@ -4,10 +4,10 @@
   overflow: hidden;
   background: white;
   // box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  box-shadow: 0 0 30px rgba(0,0,0,0.8);
-  transition: all .2s ease-in-out;
+  box-shadow: 0 0 15px rgba(240, 240, 240, .8);
+  transition: all .1s ease-in-out;
     &:hover {
-     box-shadow: 0 0 45px rgba(0,0,0,1);
+     box-shadow: 0 0 30px rgba(0,0,0,.5);
      transform: scale(1.05);
    }
    &.grow {
@@ -39,8 +39,14 @@
   margin: 0;
 }
 
+.card-trip-avatar {
+  display: flex;
+  align-items: right;
+}
+
 .card-trip-infos .avatar-bordered {
-  display: none;
+  width: 50px;
+  height: auto;
 }
 
 .card-trip .card-trip-infos {
@@ -58,8 +64,14 @@
   width: 40px;
 }
 
+.card-trip-infos-right-side {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 
 // Card Grid Layout
+
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -150,7 +162,7 @@
 .renter-info {
   padding: 36px 16px;
   text-align: center;
-  margin-right: 128px;
+  margin-right: 30px;
 }
 
 .renter-info h3 {
@@ -186,9 +198,54 @@
 }
 
 .headers {
-  margin-right: 164px;
+  margin-right: 34px;
+  text-align:center;
 }
 
 .car-details .headers {
   color: #12355B;
+}
+
+// Card Product Section
+.card-product {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+}
+
+.card-product img {
+  height: 100%;
+  width: 120px;
+  object-fit: cover;
+}
+
+.card-product h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-product p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-product .card-product-infos {
+  padding: 16px;
+}
+
+.my-profile .renter-info {
+  padding: 36px 16px;
+  text-align: left;
+  margin-right: 128px;
+}
+
+.my-profile {
+  display: flex;
 }
