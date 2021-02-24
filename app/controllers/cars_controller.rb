@@ -4,7 +4,8 @@ class CarsController < ApplicationController
     @markers = @cars.geocoded.map do |car|
       {
         lat: car.latitude,
-        lng: car.longitude
+        lng: car.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { car: car })
       }
     end
   end
@@ -20,8 +21,8 @@ class CarsController < ApplicationController
 
   def create
     @car = Car.new(car_params)
-		@car.user = current_user
-		# authorize @car
+    @car.user = current_user
+    # authorize @car
     if @car.save
       redirect_to bookings_path
     else
@@ -29,9 +30,9 @@ class CarsController < ApplicationController
     end
   end
 
-    private
+  private
 
-    def car_params
-      params.require(:car).permit(:model, :make, :year, :description, :location, :price, :photo, :user_id)
-    end
+  def car_params
+    params.require(:car).permit(:model, :make, :year, :description, :location, :price, :photo, :user_id)
+  end
 end
