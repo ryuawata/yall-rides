@@ -6,16 +6,16 @@
     <p>Marcus</p>
     <p>Member since 2018</p>
   </div> -->
-  <div class="cards">
-    <% @bookings.each do |booking| %>
-      <div class="card-product">
-        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-        <div class="card-product-infos">
-          <p><%= booking.car.make %></p>
-          <p><%= booking.car.model %></p>
-          <p>Product description with <strong>relevant info</strong> only.</p>
-        </div>
+<div class="cards">
+  <% @bookings.each do |booking| %>
+    <div class="card-product">
+      <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
+      <div class="card-product-infos">
+        <p><%= booking.car.make %></p>
+        <p><%= booking.car.model %></p>
+        <p>Product description with <strong>relevant info</strong> only.</p>
       </div>
-    <% end %>
+    </div>
+  <% end %>
   <!-- </div> -->
 </div>
