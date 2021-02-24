@@ -4,6 +4,7 @@ class CarsController < ApplicationController
   end
 
   def show
+    @booking = Booking.new
     @car = authorize Car.find(params[:id])
   end
 end
