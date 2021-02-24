@@ -8,9 +8,13 @@
 require 'faker'
 require "open-uri"
 
+Booking.destroy_all
+
+User.destroy_all
+
 puts "Renters registering their cars..."
 
-50.times do
+2.times do
 	user = User.create!(
 		first_name: Faker::Movies::HarryPotter.character.split[0],
 		last_name: Faker::Movies::HarryPotter.character.split[1],
@@ -18,9 +22,15 @@ puts "Renters registering their cars..."
 		password: Faker::Internet.password(min_length: 8)
 	)
 
-	fake_make = Faker::Vehicle.make
-	fake_model = Faker::Vehicle.model(make_of_model: fake_make)
-	# file = URI.open("https://loremflickr.com/cache/resized/7257_7521636538_b4e8574bee_280_280_nofilter.jpg")
+	file = URI.open('https://thispersondoesnotexist.com/image')
+	user.photo.attach(io: file, filename: 'user.png', content_type: 'image/png')
+
+	fake_make = Faker::Vehicle.make.split.join
+	fake_model = Faker::Vehicle.model(make_of_model: fake_make).split.join
+
+	puts "Fetching photo for #{fake_make} #{fake_model}..."
+
+	file = URI.open("http://loremflickr.com/600/400/#{fake_make}-#{fake_model}")
 
 	car = Car.new(
 		make: fake_make,
@@ -28,10 +38,10 @@ puts "Renters registering their cars..."
 		year: Faker::Vehicle.year,
 		description: Faker::Vehicle.standard_specs,
 		location: Faker::Address.city,
-		price: rand(500..3000),
+		price: rand(500..3000)
 	)
-	# car.photo.attach(io: file, filename: 'car.jpg', content_type: 'image/jpg')
-	car.user_id = user.id
+	car.photo.attach(io: file, filename: 'car.jpg', content_type: 'image/jpg')
+	car.user = user
 	car.save!
 	# file.rewind
 end
