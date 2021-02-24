@@ -17,7 +17,7 @@
         <h3>Car Owner:</h3>
         <%= cl_image_tag(@car.user.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
         <p><%= @car.user.first_name %></p>
-        <p>Member since <%= @car.year %></p>
+        <p>Member since <%= @car.year - 1 %></p>
       </div>
       <div class="car-details">
         <div class="headers">
