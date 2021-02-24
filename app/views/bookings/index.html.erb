@@ -1,19 +1,21 @@
-<h1 style="text-align:center">My Bookings</h1>
-<div class="my-profile">
+<h1 class="mt-3 mb-3" style="text-align:center">My Bookings</h1>
+<!-- <div class="my-profile">
   <div class="renter-info">
-    <h3>My Profile</h3>
+    <h3 class="" >My Profile</h3>
     <%= image_tag "https://kitt.lewagon.com/placeholder/users/arthur-littm", class: "avatar-large", alt: "avatar-large" %>
     <p>Marcus</p>
     <p>Member since 2018</p>
-  </div>
-  <div class="card-product">
+  </div> -->
+  <div class="cards">
     <% @bookings.each do |booking| %>
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-      <div class="card-product-infos">
-        <p><%= booking.car.make %></p>
-        <p><%= booking.car.model %></p>
-        <p>Product description with <strong>relevant info</strong> only.</p>
+      <div class="card-product">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <div class="card-product-infos">
+          <p><%= booking.car.make %></p>
+          <p><%= booking.car.model %></p>
+          <p>Product description with <strong>relevant info</strong> only.</p>
+        </div>
       </div>
     <% end %>
-  </div>
+  <!-- </div> -->
 </div>
