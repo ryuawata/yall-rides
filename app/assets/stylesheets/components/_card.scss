@@ -39,6 +39,11 @@
   margin: 0;
 }
 
+.card-trip-avatar {
+  display: flex;
+  align-items: right;
+}
+
 .card-trip-infos .avatar-bordered {
   width: 50px;
   height: auto;
