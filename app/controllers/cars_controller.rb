@@ -21,7 +21,7 @@ class CarsController < ApplicationController
   def create
     @car = Car.new(car_params)
 		@car.user = current_user
-		# authorize @car
+		authorize @car
     if @car.save
       redirect_to bookings_path
     else

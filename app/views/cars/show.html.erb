@@ -3,18 +3,19 @@
       <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @car.photo.key, height: 300, width: 400, resize: :limit %>);">
     <% else %>
       <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://source.unsplash.com/collection/2328095/1600x900)">
-  <% end %>
+    <% end %>
       <div class="container">
         <h1><%= @car.make %> <%= @car.model %></h1>
         <p> <%= @car.year %></p>
       </div>
     </div>
   </div>
+</div>
   <div class="car-info">
     <div class="renter-info">
       <h3>Car Owner:</h3>
       <%= cl_image_tag(@car.user.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
-      <p>Marcus</p>
+      <%= @car.user.first_name %>
       <p>Member since 2018</p>
     </div>
     <div class="car-details">

@@ -41,11 +41,11 @@
 
 .card-trip-avatar {
   display: flex;
-  align-items: right;
+  justify-content: flex-end;
 }
 
 .card-trip-infos .avatar-bordered {
-  width: 50px;
+  width: 40px;
   height: auto;
 }
 
