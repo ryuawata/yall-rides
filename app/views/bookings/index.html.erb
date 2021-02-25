@@ -27,10 +27,10 @@
     <div class="tabs">
       <ul class="nav tabs-underlined" id="dashboardTab" role="tablist">
         <li class="nav-item">
-          <a class="tab-underlined active" id="lend-tab" data-toggle="tab" href="#lend" role="tab" aria-controls="lend" aria-selected="true">Lend</a>
+          <a class="tab-underlined active" id="listings-tab" data-toggle="tab" href="#listings" role="tab" aria-controls="listings" aria-selected="true">My Listings</a>
         </li>
         <li class="nav-item">
-          <a class="tab-underlined" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">Bookings</a>
+          <a class="tab-underlined" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">My Bookings</a>
         </li>
         <li class="nav-item">
           <a class="tab-underlined" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">My Cars</a>
@@ -38,7 +38,7 @@
       </ul>
     </div>
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="lend" role="tabpanel" aria-labelledby="lend-tab">
+      <div class="tab-pane fade show active" id="listings" role="tabpanel" aria-labelledby="listings-tab">
         <div class="bookings-of-my-cars">
           <h2> Here are the people who want to rent your car </h2>
           <!-- MY LISTINGS NEW -->
@@ -49,17 +49,17 @@
                 <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "w-25", alt: "avatar-large") %>
                 <div class="card-product-infos d-flex justify-content-between">
                   <div class="card-product-info-left">
-                    <p><%= booking.car.make %></p>
-                    <p><%= "Yaller: #{booking.user.first_name}" %></p>
-                  </div>
-                  <div class="card-product-info-middle">
-                    <p>Duration: <%= "#{booking.start_date} 〜 #{booking.end_date} " %></p>
+                    <h3><%= booking.car.make %></h3>
+                    <div class="card-product-info-middle text-muted">
+                      <p>Duration: <%= "#{booking.start_date} 〜 #{booking.end_date} " %></p>
+                      <p><%= "Yaller: #{booking.user.first_name}" %></p>
+                    </div>
                   </div>
                   <div class="status">
                     <h2><%= booking.status %></h2>
                   </div>
                 </div>
-                <div class="lend-right-side">
+                <div class="listings-right-side">
                   <%= simple_form_for booking do |f| %>
                     <%= f.input :status, as: :hidden,input_html: { value: :confirmed } %>
                     <%= f.button :button do %>
@@ -73,8 +73,8 @@
                     <% end %>
                   <% end %>
                 </div>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           </div>
           <!-- MY LISTING -->
           <!-- MY LISTINGS ORIGNAL -->
@@ -82,7 +82,7 @@
             <h2>Confirmed</h2>
             <% @bookings_as_owner.where(status: "confirmed").select do |booking| %>
               <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
-                <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "w-25", alt: "avatar-large") %>
+                <%= cl_image_tag(booking.car.photo.key, crop: :fill, class: "w-25", alt: "avatar-large") %>
                 <div class="card-product-infos d-flex justify-content-between">
                   <div class="card-product-info-left">
                     <p><%= booking.car.make %></p>
@@ -92,14 +92,14 @@
                     <p>Duration: <%= "#{booking.start_date} 〜 #{booking.end_date} " %></p>
                   </div>
                 </div>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           </div>
           <div class="Rejected">
             <h2>Canceled</h2>
             <% @bookings_as_owner.where(status: "rejected").select do |booking| %>
               <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
-                <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "w-25", alt: "avatar-large") %>
+                <%= cl_image_tag(booking.car.photo.key, crop: :fill, class: "w-25", alt: "avatar-large") %>
                 <div class="card-product-infos d-flex justify-content-between">
                   <div class="card-product-info-left">
                     <p><%= booking.car.make %></p>
@@ -109,8 +109,8 @@
                     <p>Duration: <%= "#{booking.start_date} 〜 #{booking.end_date} " %></p>
                   </div>
                 </div>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

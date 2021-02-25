@@ -38,13 +38,15 @@
         <p><%= @car.description%></p>
         <br>
         <p><strong>Reviews:</strong> &nbsp;&nbsp; ⭐️⭐️⭐️⭐️⭐️</p>
-        <h3>&nbsp;&nbsp;¥<%= @car.price %></h3>
+        <h3 id='car-price' data-price='<%= @car.price %>'>&nbsp;&nbsp;¥<%= @car.price %></h3>
       </div>
     </div>
     <div class="booking-form">
       <%= simple_form_for [@car, @booking] do |f| %>
         <%= f.input :start_date, as: :date, html5: true %>
         <%= f.input :end_date, as: :date, html5: true %>
+        <h3 class="mt-4 pr-4" id='car-price' data-price='<%= @car.price %>'>&nbsp;&nbsp;¥<%= @car.price %></h3>
+        <h5 class="mt-4 mb-0">Total: <span id='form-total-price'>-</span></h5>
         <%= f.submit "Book this car" , class: "btn btn-primary book" %>
       <% end %>
     </div>
