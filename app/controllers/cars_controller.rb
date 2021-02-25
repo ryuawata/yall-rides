@@ -12,11 +12,13 @@ class CarsController < ApplicationController
 
   def show
     @booking = Booking.new
-    @car = authorize Car.find(params[:id])
+    @car =  Car.find(params[:id])
+    authorize @car
   end
 
   def new
-    @car = authorize Car.new
+    @car = Car.new
+    authorize @car
   end
 
   def create
@@ -35,6 +37,22 @@ class CarsController < ApplicationController
     authorize @car
     @car.delete
   end
+
+  def edit
+    @car = Car.find(params[:id])
+    authorize @car
+  end
+
+  def update
+    @car = Car.find(params[:id])
+    authorize @car
+    if @car.update(car_params)
+      redirect_to bookings_path, notice: 'Car was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
 
   private
 

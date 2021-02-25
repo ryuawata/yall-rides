@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :cars, dependent: :destroy
-  has_many :bookings_as_renter, through: :cars, source: :bookings
+  has_many :bookings
+  has_many :bookings_as_owner, through: :cars, source: :bookings
   has_one_attached :photo
 end

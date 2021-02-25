@@ -15,7 +15,15 @@
     <div class="car-info">
       <div class="renter-info">
         <h3>Car Owner:</h3>
-        <%= cl_image_tag(@car.user.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
+        <% if @car.user.photo.attached? %>
+          <div class="card-trip-avatar">
+            <%= cl_image_tag(@car.user.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large")%>
+          </div>
+        <% else %>
+          <div class="card-trip-avatar">
+            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-large" />
+          </div>
+        <% end %>
         <p><%= @car.user.first_name %></p>
         <p>Member since <%= @car.year - 1 %></p>
       </div>
@@ -25,12 +33,8 @@
         </div>
         <div class="details-info">
           <br>
-          <p> <strong>Description:</strong> &nbsp;&nbsp;
-            <ul>
-              <%JSON.parse(@car.description).first(5).each do |description| %></p>
-              <li> <%=description.capitalize%></li>
-            <%end%>
-          </ul>
+          <p><strong>Description:</strong> &nbsp;&nbsp;
+          <p><%= @car.description%></p>
           <br>
           <p><strong>Reviews:</strong> &nbsp;&nbsp; ⭐️⭐️⭐️⭐️⭐️</p>
           <h3>&nbsp;&nbsp;¥<%= @car.price %></h3>
