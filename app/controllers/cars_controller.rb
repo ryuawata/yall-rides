@@ -10,6 +10,13 @@ class CarsController < ApplicationController
     end
     if params[:query].present?
       @cars = Car.search_by_car_details(params[:query])
+      @markers = @cars.geocoded.map do |car|
+        {
+          lat: car.latitude,
+          lng: car.longitude,
+          infoWindow: render_to_string(partial: "info_window", locals: { car: car })
+        }
+      end
     end
   end
 
