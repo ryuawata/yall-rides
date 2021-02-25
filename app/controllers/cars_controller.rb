@@ -8,6 +8,9 @@ class CarsController < ApplicationController
         infoWindow: render_to_string(partial: "info_window", locals: { car: car })
       }
     end
+    if params[:query].present?
+      @cars = Car.search_by_car_details(params[:query])
+    end
   end
 
   def show
