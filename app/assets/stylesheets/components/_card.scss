@@ -244,3 +244,11 @@
 .my-profile {
   display: flex;
 }
+
+.index-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 32px;
+  box-shadow: none;
+}
+
