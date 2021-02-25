@@ -1,7 +1,7 @@
 <h1 class="mt-3 mb-3" style="text-align:center">All Cars</h1>
 <div class="index-page">
   <div class="cards">
-    <% @cars.each do |car| %>
+    <% @cars.reverse.each do |car| %>
       <div class="card-trip">
         <%= link_to car_path(car) do %>
           <%= cl_image_tag("#{car.photo.key}", crop: :fill) %>

@@ -19,7 +19,7 @@ class BookingsController < ApplicationController
 		@booking.user = current_user
 		@booking.car = @car
 		authorize @booking
-    		if @booking.save
+    if @booking.save
 			redirect_to bookings_path
 		else
 			render :new
@@ -27,6 +27,10 @@ class BookingsController < ApplicationController
 	end
 
 	def update
+		@booking = Booking.find(params[:id])
+		authorize @booking
+		@booking.update(booking_params)
+		redirect_to bookings_path
 	end
 
 	def edit
@@ -36,7 +40,7 @@ class BookingsController < ApplicationController
 	end
 
 	def booking_params
-		params.require(:booking).permit(:start_date, :end_date, :user_id, :car_id)
+		params.require(:booking).permit(:start_date, :end_date, :user_id, :car_id, :status)
 	end
 
 	def user_params
