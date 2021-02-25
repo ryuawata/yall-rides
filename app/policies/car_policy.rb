@@ -25,7 +25,7 @@ class CarPolicy < ApplicationPolicy
     end
 
     def edit?
-      record.user ==  user
+      record.user == user
     end
 
 end

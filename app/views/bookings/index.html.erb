@@ -3,13 +3,21 @@
 <div class="my-profile">
   <div class="renter-info">
     <h3 class="" >My Profile</h3>
-    <%= image_tag "https://kitt.lewagon.com/placeholder/users/arthur-littm", class: "avatar-large", alt: "avatar-large" %>
-    <p>Marcus</p>
+    <% if current_user.photo.attached? %>
+    <div class="card-trip-avatar">
+      <%= cl_image_tag(current_user.photo.key, crop: :thumb, gravity: :face, class: "avatar-profile" )%>
+    </div>
+    <% else %>
+    <div class="card-trip-avatar">
+      <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-bordered" />
+    </div>
+    <% end %>
+    <p><%= current_user.first_name %></p>
     <p>Member since 2018</p>
     <%= link_to "Add car", new_car_path, class: "btn btn-ghost" %>
   </div>
 </div>
-  <!-- </div> -->
+<!-- </div> -->
 <div class="tabs">
   <ul class="nav nav-tabs" id="dashboardTab" role="tablist">
     <li class="nav-item">
@@ -23,52 +31,68 @@
     </li>
   </ul>
 </div>
-
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="lend" role="tabpanel" aria-labelledby="lend-tab">
     <h2> My cars available for rent </h2>
     <br>
     <div class="cards">
       <% @cars.each do |car| %>
-        <div class="card-product">
+      <div class="card-product">
         <%= cl_image_tag(car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
-          <div class="card-product-infos">
-            <p><%= car.make %></p>
-            <p><%= car.model %></p>
-            <p><%= car.description %></p>
-            <p><%= link_to 'Update the info about this car', edit_car_path(car) %></p>
-            <p><%= link_to 'Delete this car', car, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-          </div>
+        <div class="card-product-infos">
+          <p><%= car.make %></p>
+          <p><%= car.model %></p>
+          <p><%= car.description %></p>
+          <p><%= link_to 'Update the info about this car', edit_car_path(car) %></p>
+          <p><%= link_to 'Delete this car', car, method: :delete, data: { confirm: 'Are you sure?' } %></p>
         </div>
+      </div>
       <% end %>
     </div>
     <br>
     <div class="bookings-of-my-cars">
-      <h2> Here are the person who want to rent your car </h2>
+      <h2> Here are the people who want to rent your car </h2>
       <% @bookings_as_owner.each do |booking| %>
+      <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
         <div class="card-product">
-        <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
+          <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
           <div class="card-product-infos">
             <p><%= booking.car.model %></p>
             <p><%= booking.car.make %></p>
             <p><%= booking.user.email %></p>
           </div>
+          <% if booking.pending? %>
+            <div class="lend-right-side">
+              <%= simple_form_for booking do |f| %>
+                <%= f.input :status, as: :hidden,input_html: { value: :confirmed } %>
+                <%= f.button :button do %>
+                  <i class="fas fa-check"></i>
+                <% end %>
+              <% end %>
+              <%= simple_form_for booking do |f| %>
+                <%= f.input :status, as: :hidden,input_html: { value: :rejected } %>
+                <%= f.button :button do %>
+                  <i class="fas fa-times"></i>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
+      </div>
       <% end %>
     </div>
   </div>
-
   <div class="tab-pane fade" id="borrow" role="tabpanel" aria-labelledby="borrow-tab">
-        <div class="cards">
+    <div class="cards">
       <% @bookings.each do |booking| %>
-        <div class="card-product">
+      <div class="card-product">
         <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
-          <div class="card-product-infos">
-            <p><%= booking.car.make %></p>
-            <p><%= booking.car.model %></p>
-            <p>Product description with <strong>relevant info</strong> only.</p>
-          </div>
+        <div class="card-product-infos">
+          <p><%= booking.car.make %></p>
+          <p><%= booking.car.model %></p>
+          <p>Product description with <strong>relevant info</strong> only.</p>
         </div>
+      </div>
       <% end %>
     </div>
   </div>
