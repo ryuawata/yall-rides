@@ -67,6 +67,7 @@
             <p><%= booking.car.make %></p>
             <p><%= booking.car.model %></p>
             <p>Product description with <strong>relevant info</strong> only.</p>
+            <%= link_to 'Leave a review', new_car_review_path(@car) %>
           </div>
         </div>
       <% end %>
