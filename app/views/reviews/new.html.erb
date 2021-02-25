@@ -1,0 +1,10 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+
+<%= simple_form_for [ @car, @review ] do |f| %>
+  <%= f.submit "Submit review", class: "btn btn-primary" %>
+  <div class="star-rating">
+    <% 5.times do |i| %>
+      <input type="radio" name="review[rating]" value="<%= i + 1 %>" <%= "checked" if i == 2 %> />
+    <% end %>
+  </div>
+<% end %>

@@ -4,13 +4,13 @@
   <div class="renter-info">
     <h3 class="" >My Profile</h3>
     <% if current_user.photo.attached? %>
-    <div class="card-trip-avatar">
-      <%= cl_image_tag(current_user.photo.key, crop: :thumb, gravity: :face, class: "avatar-profile" )%>
-    </div>
+      <div class="card-trip-avatar">
+        <%= cl_image_tag(current_user.photo.key, crop: :thumb, gravity: :face, class: "avatar-profile" )%>
+      </div>
     <% else %>
-    <div class="card-trip-avatar">
-      <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-bordered" />
-    </div>
+      <div class="card-trip-avatar">
+        <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-bordered" />
+      </div>
     <% end %>
     <p><%= current_user.first_name %></p>
     <p>Member since 2018</p>
@@ -37,62 +37,63 @@
     <br>
     <div class="cards">
       <% @cars.each do |car| %>
-      <div class="card-product">
-        <%= cl_image_tag(car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
-        <div class="card-product-infos">
-          <p><%= car.make %></p>
-          <p><%= car.model %></p>
-          <p><%= car.description %></p>
-          <p><%= link_to 'Update the info about this car', edit_car_path(car) %></p>
-          <p><%= link_to 'Delete this car', car, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+        <div class="card-product">
+          <%= cl_image_tag(car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
+          <div class="card-product-infos">
+            <p><%= car.make %></p>
+            <p><%= car.model %></p>
+            <p><%= car.description %></p>
+            <p><%= link_to 'Update the info about this car', edit_car_path(car) %></p>
+            <p><%= link_to 'Delete this car', car, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          </div>
         </div>
-      </div>
       <% end %>
     </div>
     <br>
     <div class="bookings-of-my-cars">
       <h2> Here are the people who want to rent your car </h2>
       <% @bookings_as_owner.each do |booking| %>
-      <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
-        <div class="card-product">
-          <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
-          <div class="card-product-infos">
-            <p><%= booking.car.model %></p>
-            <p><%= booking.car.make %></p>
-            <p><%= booking.user.email %></p>
-          </div>
-          <% if booking.pending? %>
-            <div class="lend-right-side">
-              <%= simple_form_for booking do |f| %>
-                <%= f.input :status, as: :hidden,input_html: { value: :confirmed } %>
-                <%= f.button :button do %>
-                  <i class="fas fa-check"></i>
-                <% end %>
-              <% end %>
-              <%= simple_form_for booking do |f| %>
-                <%= f.input :status, as: :hidden,input_html: { value: :rejected } %>
-                <%= f.button :button do %>
-                  <i class="fas fa-times"></i>
-                <% end %>
-              <% end %>
+        <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
+          <div class="card-product">
+            <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
+            <div class="card-product-infos">
+              <p><%= booking.car.model %></p>
+              <p><%= booking.car.make %></p>
+              <p><%= booking.user.email %></p>
             </div>
-          <% end %>
+            <% if booking.pending? %>
+              <div class="lend-right-side">
+                <%= simple_form_for booking do |f| %>
+                  <%= f.input :status, as: :hidden,input_html: { value: :confirmed } %>
+                  <%= f.button :button do %>
+                    <i class="fas fa-check"></i>
+                  <% end %>
+                <% end %>
+                <%= simple_form_for booking do |f| %>
+                  <%= f.input :status, as: :hidden,input_html: { value: :rejected } %>
+                  <%= f.button :button do %>
+                    <i class="fas fa-times"></i>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
       <% end %>
     </div>
   </div>
   <div class="tab-pane fade" id="borrow" role="tabpanel" aria-labelledby="borrow-tab">
     <div class="cards">
       <% @bookings.each do |booking| %>
-      <div class="card-product">
-        <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
-        <div class="card-product-infos">
-          <p><%= booking.car.make %></p>
-          <p><%= booking.car.model %></p>
-          <p>Product description with <strong>relevant info</strong> only.</p>
+        <div class="card-product">
+          <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
+          <div class="card-product-infos">
+            <p><%= booking.car.make %></p>
+            <p><%= booking.car.model %></p>
+            <p>Product description with <strong>relevant info</strong> only.</p>
+            <%= link_to 'Leave a review', new_car_review_path(booking.car) %>
+          </div>
         </div>
-      </div>
       <% end %>
     </div>
   </div>
