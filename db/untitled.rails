@@ -1,0 +1,43 @@
+
+
+
+<div class="cards">
+  <% @cars.each do |car| %>
+    <div class="flash <%= get_alert_class(@booking.status) %> alert alert-dismissible fade show" role="alert">
+      <div class="card-product">
+        <%= cl_image_tag(car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
+        <div class="card-product-infos">
+          <p><%= car.make %></p>
+          <p><%= car.model %></p>
+          <p><%= car.description %></p>
+        </div>
+      </div>
+    <div class="lend-right-side">
+      <a data-dismiss="alert" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </a>
+    </div>
+  </div>
+<% end %>
+</div>
+
+
+<div class="cards">
+  <% @bookings.each do |booking| %>
+    <div class="flash <%= get_alert_class(@booking.status) %> alert alert-dismissible fade show" role="alert">
+    <div class="card-product">
+    <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
+      <div class="card-product-infos">
+        <p><%= booking.car.make %></p>
+        <p><%= booking.car.model %></p>
+        <p>Product description with <strong>relevant info</strong> only.</p>
+      </div>
+    </div>
+        <div class="lend-right-side">
+      <a data-dismiss="alert" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </a>
+    </div>
+  </div>
+  <% end %>
+</div>
