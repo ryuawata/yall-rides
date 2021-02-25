@@ -30,6 +30,12 @@ class CarsController < ApplicationController
     end
   end
 
+  def destroy
+    @car = Car.find(params[:id])
+    authorize @car
+    @car.delete
+  end
+
   private
 
   def car_params

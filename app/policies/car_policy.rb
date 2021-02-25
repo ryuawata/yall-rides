@@ -17,7 +17,11 @@ class CarPolicy < ApplicationPolicy
     end
 
     def new?
-      record.user == user
+      create?
+    end
+
+    def show?
+      true
     end
   end
 end
