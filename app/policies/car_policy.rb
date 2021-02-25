@@ -3,7 +3,7 @@ class CarPolicy < ApplicationPolicy
     def resolve
       scope.all
     end
-
+  end
     def create?
       return true
     end
@@ -17,7 +17,15 @@ class CarPolicy < ApplicationPolicy
     end
 
     def new?
-      record.user == user
+      create?
     end
-  end
+
+    def show?
+      true
+    end
+
+    def edit?
+      record.user ==  user
+    end
+
 end

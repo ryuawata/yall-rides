@@ -2,13 +2,15 @@ class BookingsController < ApplicationController
 	skip_before_action :authenticate_user!, only: [:index]
 
 	def index
-		@bookings = policy_scope(Booking)
+    @bookings = policy_scope(Booking)
+    @bookings_as_owner = current_user.bookings_as_owner
 		@cars = current_user.cars
 	end
 
 	def new
 		@car = Car.find(params[:car_id])
-		@booking = authorize Booking.new
+    @booking = Booking.new
+    authorize @booking
 	end
 
 	def create

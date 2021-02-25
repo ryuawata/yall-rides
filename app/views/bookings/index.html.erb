@@ -26,6 +26,8 @@
 
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="lend" role="tabpanel" aria-labelledby="lend-tab">
+    <h2> My cars available for rent </h2>
+    <br>
     <div class="cards">
       <% @cars.each do |car| %>
         <div class="card-product">
@@ -34,6 +36,22 @@
             <p><%= car.make %></p>
             <p><%= car.model %></p>
             <p><%= car.description %></p>
+            <p><%= link_to 'Update the info about this car', edit_car_path(car) %></p>
+            <p><%= link_to 'Delete this car', car, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <br>
+    <div class="bookings-of-my-cars">
+      <h2> Here are the person who want to rent your car </h2>
+      <% @bookings_as_owner.each do |booking| %>
+        <div class="card-product">
+        <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
+          <div class="card-product-infos">
+            <p><%= booking.car.model %></p>
+            <p><%= booking.car.make %></p>
+            <p><%= booking.user.email %></p>
           </div>
         </div>
       <% end %>
