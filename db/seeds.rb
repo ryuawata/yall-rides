@@ -14,6 +14,26 @@ User.destroy_all
 
 puts "Renters registering their cars..."
 
+user = User.create(
+	first_name: "Harry",
+	last_name: "Potter",
+	email: "rentee@yall.com",
+	password: "password"
+	)
+	
+file = URI.open('https://i.ytimg.com/vi/gY_i1LcDObU/maxresdefault.jpg')
+user.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+
+user = User.create(
+	first_name: "Arthur",
+	last_name: "Weasley",
+	email: "renter@yall.com",
+	password: "password"
+	)
+
+file = URI.open('https://static.wikia.nocookie.net/heroes-and-villain/images/5/5a/Arthur-weasley.jpg/revision/latest?cb=20181021155119')
+user.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+
 10.times do
 	user = User.create!(
 		first_name: Faker::Movies::HarryPotter.character.split[0],
