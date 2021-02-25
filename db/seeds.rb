@@ -56,7 +56,7 @@ user.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
 		make: fake_make,
 		model: fake_model,
 		year: Faker::Vehicle.year,
-		description: Faker::Vehicle.standard_specs,
+		description: Faker::Vehicle.standard_specs[0] + " with " Faker::Vehicle.standard_specs[1],
 		location: Faker::Address.city,
 		price: rand(500..3000)
 	)
