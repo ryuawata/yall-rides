@@ -16,10 +16,12 @@
             <% if car.user.photo.attached? %>
               <div class="card-trip-avatar">
                 <%= cl_image_tag(car.user.photo.key, crop: :thumb, gravity: :face, class: "avatar-bordered" )%>
+              </div>
               <% else %>
+              <div class="card-trip-avatar">
                 <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-bordered" />
+              </div>
               <% end %>
-            </div>
           </div>
         </div>
       </div>
