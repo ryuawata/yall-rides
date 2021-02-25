@@ -38,3 +38,9 @@ import { loadDynamicBannerText } from '../components/banner';
 document.addEventListener('turbolinks:load', () => {
   loadDynamicBannerText();
 });
+
+import { bookingPriceUpdate } from '../components/booking_price';
+document.addEventListener('turbolinks:load', () => {
+  // ...
+  bookingPriceUpdate();
+});
