@@ -1,56 +1,91 @@
-<h2 class="mt-3 mb-3" style="text-align:center">My Dashboard</h2>
-<%# This is the profile section. Delete if we don't need it any more. %>
-<div class="dashboard">
-  <!-- Top of dashboard -->
-  <div class="dashboard-left">
-    <div class="my-profile">
-      <div class="my-profile-info">
-        <h3>My Profile</h3>
-        <% if current_user.photo.attached? %>
-          <div class="my-profile-avatar">
-            <%= cl_image_tag(current_user.photo.key, crop: :thumb, gravity: :face, class: "avatar-profile" )%>
-          </div>
-        <% else %>
-          <div class="my-profile-avatar">
-            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-bordered">
-          </div>
-        <% end %>
-        <p><%= current_user.first_name %></p>
-        <p>Member since 2018</p>
-        <% unless current_user.cars.empty? %>
-          <%= link_to "Add car", new_car_path, class: "btn btn-ghost" %>
-        <% end %>
+<div class="container">
+  <h2 class="mt-3 mb-3" style="text-align:center">My Dashboard</h2>
+  <%# This is the profile section. Delete if we don't need it any more. %>
+  <div class="dashboard">
+    <!-- Top of dashboard -->
+    <div class="dashboard-left">
+      <div class="my-profile">
+        <div class="my-profile-info">
+          <h3>My Profile</h3>
+          <% if current_user.photo.attached? %>
+            <div class="my-profile-avatar">
+              <%= cl_image_tag(current_user.photo.key, crop: :thumb, gravity: :face, class: "avatar-profile" )%>
+            </div>
+          <% else %>
+            <div class="my-profile-avatar">
+              <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-bordered">
+            </div>
+          <% end %>
+          <p><%= current_user.first_name %></p>
+          <p>Member since 2018</p>
+          <% unless current_user.cars.empty? %>
+            <%= link_to "Add car", new_car_path, class: "btn btn-ghost" %>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- end of dashboard left -->
-  <div class="dashboard-right">
-    <div class="tabs">
-      <ul class="nav tabs-underlined" id="dashboardTab" role="tablist">
-        <li class="nav-item">
-          <a class="tab-underlined active" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">My Bookings</a>
-        </li>
-        <% unless current_user.cars.empty? %>
+    <!-- end of dashboard left -->
+    <div class="dashboard-right">
+      <div class="tabs">
+        <ul class="nav tabs-underlined" id="dashboardTab" role="tablist">
           <li class="nav-item">
-            <a class="tab-underlined " id="listings-tab" data-toggle="tab" href="#listings" role="tab" aria-controls="listings" aria-selected="true">My Listings</a>
+            <a class="tab-underlined active" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">My Bookings</a>
           </li>
-          <li class="nav-item">
-            <a class="tab-underlined" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">My Cars</a>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show " id="listings" role="tabpanel" aria-labelledby="listings-tab">
-        <div class="bookings-of-my-cars">
-          <!-- MY LISTINGS NEW -->
+          <% unless current_user.cars.empty? %>
+            <li class="nav-item">
+              <a class="tab-underlined " id="listings-tab" data-toggle="tab" href="#listings" role="tab" aria-controls="listings" aria-selected="true">My Listings</a>
+            </li>
+            <li class="nav-item">
+              <a class="tab-underlined" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">My Cars</a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show " id="listings" role="tabpanel" aria-labelledby="listings-tab">
+          <div class="bookings-of-my-cars">
+            <!-- MY LISTINGS NEW -->
+            <div class="status">
+              <h3> Here are the people who want to rent your car </h3>
+              <h3>Pending</h3>
+              <% @bookings_as_owner.where(status: "pending").select do |booking| %>
+                <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
+                  <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "w-25", alt: "avatar-large") %>
+                  <div class="card-product-infos d-flex justify-content-between">
+                    <div class="card-product-info-left">
+                      <h3><%= booking.car.make %></h3>
+                      <div class="card-product-info-middle text-muted">
+                        <p>Duration: <%= "#{booking.start_date} 〜 #{booking.end_date} " %></p>
+                        <p><%= "Yaller: #{booking.user.first_name}" %></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="listings-right-side">
+                    <%= simple_form_for booking do |f| %>
+                      <%= f.input :status, as: :hidden,input_html: { value: :confirmed } %>
+                      <%= f.button :button do %>
+                        <i class="status-button-confirm fas fa-check"></i>
+                      <% end %>
+                    <% end %>
+                    <%= simple_form_for booking do |f| %>
+                      <%= f.input :status, as: :hidden,input_html: { value: :rejected } %>
+                      <%= f.button :button do %>
+                        <i class="status-button-reject fas fa-times"></i>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <!-- MY LISTING -->
+          <!-- MY LISTINGS ORIGNAL -->
           <div class="status">
-            <h3> Here are the people who want to rent your car </h3>
-            <h3>Pending</h3>
-            <% @bookings_as_owner.where(status: "pending").select do |booking| %>
+            <h3>Confirmed</h3>
+            <% @bookings_as_owner.where(status: "confirmed").select do |booking| %>
               <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
-                <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "w-25", alt: "avatar-large") %>
-                <div class="card-product-infos d-flex justify-content-between">
+                <%= cl_image_tag(booking.car.photo.key, crop: :fill, class: "w-25", alt: "avatar-large") %>
+                <div class="card-product-infos d-flex align-items-start">
                   <div class="card-product-info-left">
                     <h3><%= booking.car.make %></h3>
                     <div class="card-product-info-middle text-muted">
@@ -59,29 +94,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="listings-right-side">
-                  <%= simple_form_for booking do |f| %>
-                    <%= f.input :status, as: :hidden,input_html: { value: :confirmed } %>
-                    <%= f.button :button do %>
-                      <i class="status-button-confirm fas fa-check"></i>
-                    <% end %>
-                  <% end %>
-                  <%= simple_form_for booking do |f| %>
-                    <%= f.input :status, as: :hidden,input_html: { value: :rejected } %>
-                    <%= f.button :button do %>
-                      <i class="status-button-reject fas fa-times"></i>
-                    <% end %>
-                  <% end %>
-                </div>
               </div>
             <% end %>
           </div>
         </div>
-        <!-- MY LISTING -->
-        <!-- MY LISTINGS ORIGNAL -->
         <div class="status">
-          <h3>Confirmed</h3>
-          <% @bookings_as_owner.where(status: "confirmed").select do |booking| %>
+          <h3>Canceled</h3>
+          <% @bookings_as_owner.where(status: "rejected").select do |booking| %>
             <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
               <%= cl_image_tag(booking.car.photo.key, crop: :fill, class: "w-25", alt: "avatar-large") %>
               <div class="card-product-infos d-flex align-items-start">
@@ -97,66 +116,49 @@
           <% end %>
         </div>
       </div>
-      <div class="status">
-        <h3>Canceled</h3>
-        <% @bookings_as_owner.where(status: "rejected").select do |booking| %>
-          <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
-            <%= cl_image_tag(booking.car.photo.key, crop: :fill, class: "w-25", alt: "avatar-large") %>
-            <div class="card-product-infos d-flex align-items-start">
-              <div class="card-product-info-left">
-                <h3><%= booking.car.make %></h3>
-                <div class="card-product-info-middle text-muted">
-                  <p>Duration: <%= "#{booking.start_date} 〜 #{booking.end_date} " %></p>
-                  <p><%= "Yaller: #{booking.user.first_name}" %></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    <!-- MY LISTINGS -->
-    <div class="tab-pane fade show active" id="booking" role="tabpanel" aria-labelledby="booking-tab">
-      <div class="bookings-of-my-cars">
-        <h2> Here are your reservations </h2>
-        <% @bookings.each do |booking| %>
-          <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
-            <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
-            <div class="card-product-infos">
-              <p><%= booking.car.make %></p>
-              <p><%= booking.car.model %></p>
-              <p>Product description with <strong>relevant info</strong> only.</p>
-              <% if booking.confirmed? %>
-                <% if booking.reviews.any?{ |review| review.user == current_user } %>
-                  <!-- <p><%= link_to 'Leave a review', new_car_review_path(booking.car)%></p> -->
-                  <%= 'Thank you' %>
-                <% else %>
-                  <%= render 'reviews/review', car: booking.car, review: @review %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-      <div class="my-cars">
-        <div class="status">
-          <h3> My cars available for rent </h3>
-          <% @cars.each do |car| %>
-            <div class="flash flash-info alert alert-dismissible fade show" role="alert">
-              <%= cl_image_tag(car.photo.key, crop: :fill, class: "w-25", alt: "avatar-large") %>
+      <!-- MY LISTINGS -->
+      <div class="tab-pane fade show active" id="booking" role="tabpanel" aria-labelledby="booking-tab">
+        <div class="bookings-of-my-cars">
+          <h2> Here are your reservations </h2>
+          <% @bookings.each do |booking| %>
+            <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
+              <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large") %>
               <div class="card-product-infos">
-                <h3><%= car.make %></h3>
-                <p><%= car.description %></p>
-                <p><%= link_to 'Update the info about this car', edit_car_path(car) %></p>
-                <p><%= link_to 'Delete this car', car, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                <p><%= booking.car.make %></p>
+                <p><%= booking.car.model %></p>
+                <p>Product description with <strong>relevant info</strong> only.</p>
+                <% if booking.confirmed? %>
+                  <% if booking.reviews.any?{ |review| review.user == current_user } %>
+                    <!-- <p><%= link_to 'Leave a review', new_car_review_path(booking.car)%></p> -->
+                    <%= 'Thank you' %>
+                  <% else %>
+                    <%= render 'reviews/review', car: booking.car, review: @review %>
+                  <% end %>
+                <% end %>
               </div>
             </div>
           <% end %>
         </div>
       </div>
-      <%# Content goes here!!!!!!! %>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="my-cars">
+          <div class="status">
+            <h3> My cars available for rent </h3>
+            <% @cars.each do |car| %>
+              <div class="flash flash-info alert alert-dismissible fade show" role="alert">
+                <%= cl_image_tag(car.photo.key, crop: :fill, class: "w-25", alt: "avatar-large") %>
+                <div class="card-product-infos">
+                  <h3><%= car.make %></h3>
+                  <p><%= car.description %></p>
+                  <p><%= link_to 'Update the info about this car', edit_car_path(car) %></p>
+                  <p><%= link_to 'Delete this car', car, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <%# Content goes here!!!!!!! %>
+      </div>
     </div>
   </div>
 </div>
