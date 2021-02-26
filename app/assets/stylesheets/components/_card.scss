@@ -36,7 +36,7 @@
 
 .card-trip-avatar {
   display: flex;
-  justify-content: flex-end;
+  justify-content:space-around;
 }
 
 .card-trip-infos .avatar-bordered {
@@ -152,10 +152,11 @@
   display: grid;
   justify-content: space-between;
   grid-template-columns: 1fr 2fr 1fr;
+  margin: 16px 216px;
 }
 
 .renter-info {
-  padding: 36px 16px;
+  padding: 36px;
   text-align: center;
   margin-right: 30px;
 }
