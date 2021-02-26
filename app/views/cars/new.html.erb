@@ -1,12 +1,12 @@
-<%= simple_form_for @car do |f| %>
-<%= f.input :model%>
-<%= f.input :make %>
-<%= f.input :year %>
-<%= f.input :description %>
-<%= f.input :location %>
-<%= f.input :price %>
- <%= f.input :photo, as: :file %>
-<%= f.submit "Rent my car" , class: "btn btn-primary" %>
-<% end %>
-
-
+<div class="container">
+  <%= simple_form_for @car do |f| %>
+  <%= f.input :model%>
+  <%= f.input :make %>
+  <%= f.input :year %>
+  <%= f.input :description %>
+  <%= f.input :location %>
+  <%= f.input :price %>
+  <%= f.input :photo, as: :file %>
+  <%= f.submit "Rent my car" , class: "btn btn-primary" %>
+  <% end %>
+</div>
