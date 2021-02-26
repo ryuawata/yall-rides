@@ -22,7 +22,6 @@
     </div>
   </div>
   <!-- end of dashboard left -->
-  <!-- </div> -->
   <div class="dashboard-right">
     <div class="tabs">
       <ul class="nav tabs-underlined" id="dashboardTab" role="tablist">
@@ -67,8 +66,9 @@
                     <%= f.input :status, as: :hidden,input_html: { value: :rejected } %>
                     <%= f.button :button do %>
                       <i class="status-button-reject fas fa-times"></i>
+                      <% end %>
                     <% end %>
-                  <% end %>
+                  </div>
                 </div>
               </div>
             <% end %>
@@ -89,8 +89,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
           <div class="status">
             <h3>Canceled</h3>
