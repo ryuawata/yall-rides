@@ -92,3 +92,32 @@
 .book {
   margin: 30px;
 }
+
+.status-button-confirm {
+  width: 56px;
+  height: 56px;
+  border-style: solid;
+  border-radius: 50%;
+  border-color: #B8B8B8;
+  box-shadow: 0 0 2px 1px #B8B8B8;
+}
+
+.status-button-confirm:hover {
+  background-color: #1edd88;
+  opacity: 20%;
+}
+
+.status-button-reject {
+  width: 56px;
+  height: 56px;
+  border-style: solid;
+  border-radius: 50%;
+  border-color: #B8B8B8;
+  box-shadow: 0 0 2px 1px #B8B8B8;
+}
+
+.status-button-reject:hover {
+  background-color: #FD0F15;
+  opacity: 20%;
+}
+

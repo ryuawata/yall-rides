@@ -244,20 +244,20 @@
   padding: 16px;
 }
 
-.my-profile .renter-info {
-  padding: 36px 16px;
-  text-align: left;
-  margin-right: 128px;
+.card-product-info-left p {
+  margin: 0px;
 }
 
-.my-profile {
-  display: flex;
-}
 
 .index-page {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 32px;
   box-shadow: none;
+}
+
+.status h3 {
+  margin-top: 16px;
+  border-bottom: solid;
 }
 

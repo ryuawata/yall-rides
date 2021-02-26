@@ -22,7 +22,7 @@ class CarsController < ApplicationController
 
   def show
     @booking = Booking.new
-    @car =  Car.find(params[:id])
+    @car = Car.find(params[:id])
     authorize @car
   end
 
@@ -33,8 +33,8 @@ class CarsController < ApplicationController
 
   def create
     @car = Car.new(car_params)
-		@car.user = current_user
-		authorize @car
+    @car.user = current_user
+    authorize @car
     if @car.save
       redirect_to bookings_path
     else
@@ -45,7 +45,11 @@ class CarsController < ApplicationController
   def destroy
     @car = Car.find(params[:id])
     authorize @car
-    @car.delete
+    if @car.booking.confirmed? || @car.booking.pending?
+      redirect_to bookings_path, notice: 'Cannot update car that has pending bookings.'
+    else
+      @car.delete
+    end
   end
 
   def edit
