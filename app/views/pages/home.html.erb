@@ -5,21 +5,23 @@
       <p>
         <span id="banner-typed-text"></span>
       </p>
-      <div class="search-form-control form-group">
-        <%= form_tag cars_path, method: :get do %>
-          <%= text_field_tag :query,
+      <div class="options">
+        <div class="banner-button">
+          <%= link_to "Browse All Cars", cars_path, class: "btn btn-ghost" %>
+        </div>
+        <div class="or">
+          <p> OR </p>
+        </div>
+        <div class="search-form-control form-group">
+          <%= form_tag cars_path, method: :get do %>
+            <%= text_field_tag :query,
         params[:query],
         class: "form-control",
         placeholder: "Find a car or location"
         %>
-          <%= submit_tag "Search", class: "btn btn-flat" %>
-        <% end %>
-      </div>
-      <div class="or">
-        <p> OR </p>
-      </div>
-      <div class="banner-button">
-        <%= link_to "Browse All Cars", cars_path, class: "btn btn-ghost" %>
+            <%= submit_tag "Search", class: "btn btn-flat" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
