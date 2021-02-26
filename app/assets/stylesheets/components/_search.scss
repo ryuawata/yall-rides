@@ -1,8 +1,9 @@
 .search-form-control {
   position: relative;
-  margin-top: 228px;
-  margin-right: 200px;
-  margin-left: 200px;
+  margin-top: 320px;
+  // margin-right: 0px;
+  width: 520px;
+  margin-left: 60px;
 }
 
 .search-form-control .btn {
@@ -13,7 +14,7 @@
 }
 
 .search-form-control .form-control {
-  height: 3.5rem;
+  height: 4.5rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   border: 1px solid #E7E7E7;
 }
@@ -26,4 +27,11 @@
 
 .or {
   text-align: center;
+  margin-top: 320px;
+  margin-right: 100px;
+  margin-left: 200px;
+}
+
+.options {
+  display: flex;
 }

@@ -13,41 +13,40 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="car-info">
-    <div class="renter-info">
-      <h3>Car Owner:</h3>
-      <% if @car.user.photo.attached? %>
-        <div class="card-trip-avatar">
-          <%= cl_image_tag(@car.user.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large")%>
-        </div>
-      <% else %>
-        <div class="card-trip-avatar">
-          <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-large" />
-        </div>
-      <% end %>
-      <p><%= @car.user.first_name %></p>
-      <p>Member since <%= @car.year - 1 %></p>
-    </div>
-    <div class="car-details">
-      <div class="headers">
-        <h1><%= @car.year %> <%= @car.make %> <%= @car.model %></h1>
+    <div class="car-info">
+      <div class="renter-info">
+        <h3>Car Owner:</h3>
+        <% if @car.user.photo.attached? %>
+          <div class="card-trip-avatar">
+            <%= cl_image_tag(@car.user.photo.key, crop: :thumb, gravity: :face, class: "avatar-large", alt: "avatar-large")%>
+          </div>
+        <% else %>
+          <div class="card-trip-avatar">
+            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-large" />
+          </div>
+        <% end %>
+        <p><%= @car.user.first_name %></p>
+        <p>Member since <%= @car.year - 1 %></p>
       </div>
-      <div class="details-info">
-        <p style="text-align:center;">⭐️⭐️⭐️⭐️⭐️ &nbsp; (32) </p>
-        <br>
-        <p><%= @car.description%></p>
-        <br>
+      <div class="car-details">
+        <div class="headers">
+          <h1><%= @car.year %> <%= @car.make %> <%= @car.model %></h1>
+        </div>
+        <div class="details-info">
+          <p style="text-align:center;">⭐️⭐️⭐️⭐️⭐️ &nbsp; (32) </p>
+          <br>
+          <p><%= @car.description%></p>
+          <br>
+        </div>
+      </div>
+      <div class="booking-form">
+        <%= simple_form_for [@car, @booking] do |f| %>
+          <%= f.input :start_date, as: :date, html5: true %>
+          <%= f.input :end_date, as: :date, html5: true %>
+          <h3 class="mt-4 pr-4" id='car-price' data-price='<%= @car.price %>'>&nbsp;&nbsp;¥<%= @car.price %></h3>
+          <h5 class="mt-4 mb-0">Total: <span id='form-total-price'>-</span></h5>
+          <%= f.submit "Book this car" , class: "btn btn-flat" %>
+        <% end %>
       </div>
     </div>
-    <div class="booking-form">
-      <%= simple_form_for [@car, @booking] do |f| %>
-        <%= f.input :start_date, as: :date, html5: true %>
-        <%= f.input :end_date, as: :date, html5: true %>
-        <h3 class="mt-4 pr-4" id='car-price' data-price='<%= @car.price %>'>&nbsp;&nbsp;¥<%= @car.price %></h3>
-        <h5 class="mt-4 mb-0">Total: <span id='form-total-price'>-</span></h5>
-        <%= f.submit "Book this car" , class: "btn btn-flat" %>
-      <% end %>
-    </div>
   </div>
-</div>
