@@ -5,6 +5,7 @@ class BookingsController < ApplicationController
     @bookings = policy_scope(Booking)
     @bookings_as_owner = current_user.bookings_as_owner
     @cars = policy_scope(current_user.cars)
+    @review = Review.new
   end
 
   def new

@@ -11,10 +11,14 @@ class ReviewsController < ApplicationController
     @review.car = @car
     @review.user = current_user
     authorize @review
+    raise
     if @review.save
-      redirect_to bookings_path(@car)
+      redirect_to bookings_path
     else
-      render :new
+      @bookings_as_owner = current_user.bookings_as_owner
+      @bookings = current_user.bookings
+      @cars = current_user.cars
+      render 'bookings/index'
     end
   end
 
