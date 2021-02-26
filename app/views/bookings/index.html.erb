@@ -130,7 +130,7 @@
                 <p><%= booking.car.model %></p>
                 <p>Product description with <strong>relevant info</strong> only.</p>
                 <% if booking.confirmed? %>
-                  <% if @review.user == current_user %>
+                  <% if booking.reviews.any?{ |review| review.user == current_user } %>
                     <!-- <p><%= link_to 'Leave a review', new_car_review_path(booking.car)%></p> -->
                     <%= 'Thank you' %>
                   <% else %>
