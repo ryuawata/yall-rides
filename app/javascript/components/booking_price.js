@@ -16,9 +16,9 @@ const priceInsertHTML = (totalPrice) => {
   totalPriceElement.innerText = `¥${formattedPrice}`
 }
 const priceCalcuation = () => {
-  const priceElement = document.getElementById('car-price')
   const startDateInput = document.getElementById('booking_start_date')
   const endDateInput = document.getElementById('booking_end_date')
+  const priceElement = document.getElementById('car-price')
   console.log('event trigger')
   if (startDateInput.value !== '' && endDateInput.value !== '') {
     // convert strings into actual dates
