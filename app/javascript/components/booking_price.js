@@ -1,9 +1,8 @@
-const startDateInput = document.getElementById('booking_start_date')
-const endDateInput = document.getElementById('booking_end_date')
+
 // TODO: how to get the price of the car?
   // => the price of the car needs to be embedded in the HTML view
   // => in the HTML: id='car-price' data-price='<%= @car.price %>'
-const priceElement = document.getElementById('car-price')
+
 const numberWithCommas = (num) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
@@ -17,6 +16,9 @@ const priceInsertHTML = (totalPrice) => {
   totalPriceElement.innerText = `¥${formattedPrice}`
 }
 const priceCalcuation = () => {
+  const priceElement = document.getElementById('car-price')
+  const startDateInput = document.getElementById('booking_start_date')
+  const endDateInput = document.getElementById('booking_end_date')
   console.log('event trigger')
   if (startDateInput.value !== '' && endDateInput.value !== '') {
     // convert strings into actual dates
@@ -39,6 +41,8 @@ const priceCalcuation = () => {
   }
 }
 const bookingPriceUpdate = () => {
+  const startDateInput = document.getElementById('booking_start_date')
+  const endDateInput = document.getElementById('booking_end_date')
   if (startDateInput && endDateInput) {
     startDateInput.addEventListener('change', (event) => {
       priceCalcuation(event)
