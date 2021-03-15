@@ -22,12 +22,20 @@
         <% end %>
       </div>
     </div>
-    <!-- end of dashboard left -->
-    <div class="dashboard-right">
-      <div class="tabs">
-        <ul class="nav tabs-underlined" id="dashboardTab" role="tablist">
+  </div>
+  <!-- end of dashboard left -->
+  <div class="dashboard-right">
+    <div class="tabs">
+      <ul class="nav tabs-underlined" id="dashboardTab" role="tablist">
+        <li class="nav-item">
+          <a class="tab-underlined active" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">My Bookings</a>
+        </li>
+        <% unless current_user.cars.empty? %>
           <li class="nav-item">
-            <a class="tab-underlined active" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">My Bookings</a>
+            <a class="tab-underlined " id="listings-tab" data-toggle="tab" href="#listings" role="tab" aria-controls="listings" aria-selected="true">My Listings</a>
+          </li>
+          <li class="nav-item">
+            <a class="tab-underlined" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">My Cars</a>
           </li>
         <% end %>
       </ul>
@@ -37,11 +45,12 @@
         <div class="bookings-of-my-cars">
           <!-- MY LISTINGS NEW -->
           <div class="status">
-            <h3>Confirmed</h3>
-            <% @bookings_as_owner.where(status: "confirmed").select do |booking| %>
+            <h3> Here are the people who want to rent your car </h3>
+            <h3>Pending</h3>
+            <% @bookings_as_owner.where(status: "pending").select do |booking| %>
               <div class="flash <%= get_alert_class(booking.status) %> alert alert-dismissible fade show" role="alert">
-                <%= cl_image_tag(booking.car.photo.key, crop: :fill, class: "w-25", alt: "avatar-large") %>
-                <div class="card-product-infos d-flex align-items-start">
+                <%= cl_image_tag(booking.car.photo.key, crop: :thumb, gravity: :face, class: "w-25", alt: "avatar-large") %>
+                <div class="card-product-infos d-flex justify-content-between">
                   <div class="card-product-info-left">
                     <h3><%= booking.car.make %></h3>
                     <div class="card-product-info-middle text-muted">
@@ -49,6 +58,20 @@
                       <p><%= "Yaller: #{booking.user.first_name}" %></p>
                     </div>
                   </div>
+                </div>
+                <div class="listings-right-side">
+                  <%= simple_form_for booking do |f| %>
+                    <%= f.input :status, as: :hidden,input_html: { value: :confirmed } %>
+                    <%= f.button :button do %>
+                      <i class="status-button-confirm fas fa-check"></i>
+                    <% end %>
+                  <% end %>
+                  <%= simple_form_for booking do |f| %>
+                    <%= f.input :status, as: :hidden,input_html: { value: :rejected } %>
+                    <%= f.button :button do %>
+                      <i class="status-button-reject fas fa-times"></i>
+                    <% end %>
+                  <% end %>
                 </div>
               </div>
             <% end %>
